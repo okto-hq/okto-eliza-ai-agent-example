@@ -1,94 +1,72 @@
-# Eliza
+# Okto AI agent example
 
-## Edit the character files
+A comprehensive integration plugin for ElizaOS that provides access to Okto's various APIs and services, enabling seamless Web3 interactions.
 
-Open `src/character.ts` to modify the default character. Uncomment and edit.
+## Dependencies
 
-### Custom characters
+- node v23.3.0
+- elizaos v0.1.9
 
-To load custom characters instead:
-- Use `pnpm start --characters="path/to/your/character.json"`
-- Multiple character files can be loaded simultaneously
-
-### Add clients
-```
-# in character.ts
-clients: [Clients.TWITTER, Clients.DISCORD],
-
-# in character.json
-clients: ["twitter", "discord"]
-```
-
-## Duplicate the .env.example template
+## Installation and run
 
 ```bash
-cp .env.example .env
+pnpm install
+pnpm start --character="./characters/okto.character.json"
 ```
 
-\* Fill out the .env file with your own values.
+## Features
 
-### Add login credentials and keys to .env
-```
-DISCORD_APPLICATION_ID="discord-application-id"
-DISCORD_API_TOKEN="discord-api-token"
-...
-OPENROUTER_API_KEY="sk-xx-xx-xxx"
-...
-TWITTER_USERNAME="username"
-TWITTER_PASSWORD="password"
-TWITTER_EMAIL="your@email.com"
-```
+- **Portfolio Management**: Retrieve user portfolio data and NFT balances.
+- **Wallet Management**: Access user's wallets.
+- **Token Information**: Get tokens list and details.
+- **Chain Support**: Fetch supported blockchain networks.
+- **NFT Collections & Order History**: Retrieve NFT collections and user order history.
+- **Token Transfer**: Initiate token transfers.
+- **NFT Transfer**: Initiate NFT transfers.
+- **EVM Raw Transaction**: Execute raw Ethereum Virtual Machine (EVM) transactions.
+- **Swap Transactions**: Execute EVM swap transactions
 
-## Install dependencies and start your agent
+## Installation
 
 ```bash
-pnpm i && pnpm start
-```
-Note: this requires node to be at least version 22 when you install packages and run the agent.
-
-## Run with Docker
-
-### Build and run Docker Compose (For x86_64 architecture)
-
-#### Edit the docker-compose.yaml file with your environment variables
-
-```yaml
-services:
-    eliza:
-        environment:
-            - OPENROUTER_API_KEY=blahdeeblahblahblah
+npm install elizaos-okto-plugin
 ```
 
-#### Run the image
+## Configuration
 
-```bash
-docker compose up
+The plugin requires several environment variables to be set:
+
+```env
+# Okto specific settings
+OKTO_ENVIRONMENT=                # Optional. Defaults to "sandbox". Options: sandbox, staging, production.
+OKTO_VENDOR_PRIVATE_KEY=         # Required. Your vendor private key provided by Okto.
+OKTO_VENDOR_SWA=                 # Required. Your vendor SWA provided by Okto.
+
+# Google OAuth settings
+GOOGLE_CLIENT_ID=                # Required. Get from https://console.cloud.google.com/
+GOOGLE_CLIENT_SECRET=            # Required. Get from https://console.cloud.google.com/
 ```
 
-### Build the image with Mac M-Series or aarch64
+## Setup Google OAuth
 
-Make sure docker is running.
+1. Go to https://console.cloud.google.com/
+2. Create a new project.
+3. Create OAuth credentials.
+4. Retrieve the client ID and secret.
+5. Set the redirect URL to http://localhost:5000 (or your desired endpoint).
 
-```bash
-# The --load flag ensures the built image is available locally
-docker buildx build --platform linux/amd64 -t eliza-starter:v1 --load .
+## Usage
+
+```typescript
+import OktoPlugin from "elizaos-okto-plugin";
+
+runtime.registerPlugin(OktoPlugin);
 ```
 
-#### Edit the docker-compose-image.yaml file with your environment variables
+## Contributing
 
-```yaml
-services:
-    eliza:
-        environment:
-            - OPENROUTER_API_KEY=blahdeeblahblahblah
-```
+Contributions are welcome! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for more information.
 
-#### Run the image
+## License
 
-```bash
-docker compose -f docker-compose-image.yaml up
-```
-
-# Deploy with Railway
-
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/template/aW47_j)
+This plugin is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
