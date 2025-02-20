@@ -29,7 +29,7 @@ pnpm start --character="./characters/okto.character.json"
 ## Installation
 
 ```bash
-npm install elizaos-okto-plugin
+npm install @okto_web3/eliza-plugin
 ```
 
 ## Configuration
@@ -39,8 +39,8 @@ The plugin requires several environment variables to be set:
 ```env
 # Okto specific settings
 OKTO_ENVIRONMENT=                # Optional. Defaults to "sandbox". Options: sandbox, staging, production.
-OKTO_VENDOR_PRIVATE_KEY=         # Required. Your vendor private key provided by Okto.
-OKTO_VENDOR_SWA=                 # Required. Your vendor SWA provided by Okto.
+OKTO_CLIENT_PRIVATE_KEY=         # Required. Your client private key provided by Okto.
+OKTO_CLIENT_SWA=                 # Required. Your client SWA provided by Okto.
 
 # Google OAuth settings
 GOOGLE_CLIENT_ID=                # Required. Get from https://console.cloud.google.com/
@@ -58,7 +58,7 @@ GOOGLE_CLIENT_SECRET=            # Required. Get from https://console.cloud.goog
 ## Usage
 
 ```typescript
-import OktoPlugin from "elizaos-okto-plugin";
+import OktoPlugin from "@okto_web3/eliza-plugin";
 
 runtime.registerPlugin(OktoPlugin);
 ```
