@@ -22,7 +22,7 @@ import {
   parseArguments,
 } from "./config/index.ts";
 import { initializeDatabase } from "./database/index.ts";
-import OktoPlugin from "@okto_web3/eliza-plugin";
+import {OktoPlugin} from "@okto_web3/eliza-plugin";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -49,6 +49,7 @@ export function createAgent(
 
   nodePlugin ??= createNodePlugin();
 
+  const oktoPlugin = new OktoPlugin()
   return new AgentRuntime({
     databaseAdapter: db,
     token,
@@ -58,11 +59,11 @@ export function createAgent(
     plugins: [
       bootstrapPlugin,
       nodePlugin,
-      OktoPlugin,
+      oktoPlugin,
     ].filter(Boolean),
     providers: [],
     actions: [],
-    services: [],
+    services: [oktoPlugin.oktoService],
     managers: [],
     cacheManager: cache,
   });
