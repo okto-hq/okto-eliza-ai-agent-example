@@ -1,30 +1,43 @@
-# Okto AI agent example
+# @okto_web3/eliza-plugin 
 
 A comprehensive integration plugin for ElizaOS that provides access to Okto's various APIs and services, enabling seamless Web3 interactions.
 
-## Dependencies
-
-- node v23.3.0
-- elizaos v0.1.9
-
-## Installation and run
-
-```bash
-pnpm install
-pnpm start --character="./characters/okto.character.json"
-```
-
 ## Features
 
-- **Portfolio Management**: Retrieve user portfolio data and NFT balances.
-- **Wallet Management**: Access user's wallets.
-- **Token Information**: Get tokens list and details.
-- **Chain Support**: Fetch supported blockchain networks.
-- **NFT Collections & Order History**: Retrieve NFT collections and user order history.
-- **Token Transfer**: Initiate token transfers.
-- **NFT Transfer**: Initiate NFT transfers.
-- **EVM Raw Transaction**: Execute raw Ethereum Virtual Machine (EVM) transactions.
-- **Swap Transactions**: Execute EVM swap transactions
+- **Portfolio Management**: 
+  - Get user portfolio data and balances
+  - View NFT portfolio details
+  - Track token holdings across multiple networks
+
+- **Wallet Management**: 
+  - Access user's wallets
+  - View wallet addresses and network details
+
+- **Token Operations**:
+  - Get supported tokens list and details
+  - Transfer tokens between addresses
+  - Swap tokens using DEX integrations
+  - Execute EVM raw transactions
+
+- **NFT Operations**:
+  - View NFT collections
+  - Transfer NFTs (ERC721/ERC1155)
+  - Track NFT balances
+
+- **Chain Support**: 
+  - Multiple networks supported including:
+    - Ethereum
+    - Polygon
+    - Optimism
+    - Arbitrum
+    - Base
+    - Linea
+    - BSC
+    - Avalanche
+    - Solana
+    - Aptos
+
+- **Transaction History**: View detailed order history across networks
 
 ## Installation
 
@@ -50,18 +63,48 @@ GOOGLE_CLIENT_SECRET=            # Required. Get from https://console.cloud.goog
 ## Setup Google OAuth
 
 1. Go to https://console.cloud.google.com/
-2. Create a new project.
-3. Create OAuth credentials.
-4. Retrieve the client ID and secret.
-5. Set the redirect URL to http://localhost:5000 (or your desired endpoint).
+2. Create a new project
+3. Create OAuth credentials
+4. Add authorized redirect URI: http://localhost:5000
+5. Get the client ID and secret
+6. Set them in your environment variables
 
 ## Usage
 
 ```typescript
-import OktoPlugin from "@okto_web3/eliza-plugin";
-
-runtime.registerPlugin(OktoPlugin);
+import {OktoPlugin} from "@okto_web3/eliza-plugin";
+const oktoPlugin = new OktoPlugin()
+  return new AgentRuntime({
+    databaseAdapter: db,
+    token,
+    modelProvider: character.modelProvider,
+    evaluators: [],
+    character,
+    plugins: [
+      bootstrapPlugin,
+      nodePlugin,
+      oktoPlugin,
+    ].filter(Boolean),
+    providers: [],
+    actions: [],
+    services: [oktoPlugin.oktoService],
+    managers: [],
+    cacheManager: cache,
+  });
 ```
+
+### Available Actions
+
+- `OKTO_GET_PORTFOLIO` - Get user's token portfolio
+- `OKTO_GET_ACCOUNT` - Get user's wallet accounts
+- `OKTO_GET_CHAINS` - Get supported blockchain networks
+- `OKTO_GET_NFT_COLLECTIONS` - Get user's NFT collections
+- `OKTO_GET_ORDERS_HISTORY` - Get transaction history
+- `OKTO_GET_PORTFOLIO_NFT` - Get NFT portfolio
+- `OKTO_GET_TOKENS` - Get supported tokens
+- `OKTO_TRANSFER` - Transfer tokens
+- `OKTO_NFT_TRANSFER` - Transfer NFTs
+- `OKTO_SWAP` - Swap tokens using DEX
 
 ## Contributing
 
