@@ -23,7 +23,7 @@ import {
 } from "./config/index.ts";
 import { initializeDatabase } from "./database/index.ts";
 import {OktoPlugin} from "@okto_web3/eliza-plugin";
-
+import { OktoExamplePlugin } from "./plugins/okto-example/index.ts";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -60,6 +60,7 @@ export function createAgent(
       bootstrapPlugin,
       nodePlugin,
       oktoPlugin,
+      new OktoExamplePlugin(),
     ].filter(Boolean),
     providers: [],
     actions: [],
