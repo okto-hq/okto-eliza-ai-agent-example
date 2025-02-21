@@ -1,6 +1,30 @@
-# @okto_web3/eliza-plugin 
+# @okto_web3/eliza-plugin Example 
 
 A comprehensive integration plugin for ElizaOS that provides access to Okto's various APIs and services, enabling seamless Web3 interactions.
+
+## Dependencies
+
+- Node.js v23+
+- pnpm 
+- Okto account
+- LLM model provider (e.g. OpenAI, Anthropic, etc.)
+
+## How to run this Sample agent
+```
+git clone https://github.com/okto-hq/okto-eliza-ai-agent-example
+cd okto-eliza-ai-agent-example
+pnpm install
+pnpm run start
+```
+
+## How to modify this Sample agent 
+- currently this sample agent is using Groq as the LLM model provider.
+- you can modify the `characters/okto.character.json` file to use different LLM model provider.
+```
+characters/okto.character.json
+```
+
+## Update 
 
 ## Features
 
@@ -59,6 +83,8 @@ OKTO_CLIENT_SWA=                 # Required. Your client SWA provided by Okto.
 GOOGLE_CLIENT_ID=                # Required. Get from https://console.cloud.google.com/
 GOOGLE_CLIENT_SECRET=            # Required. Get from https://console.cloud.google.com/
 ```
+
+Note: You also need to set the environment variable for the LLM you want to use.
 
 ## Setup Google OAuth
 
